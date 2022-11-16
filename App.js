@@ -92,10 +92,13 @@ export default function App({ navigation }) {
       let userToken;
 
       try {
+        /* SRK: Do I have token already? */
         // Restore token stored in `SecureStore` or any other encrypted storage
-        userToken = await SecureStore.getItemAsync("userToken");
+        userToken = await SecureStore.getItemAsync("userToken");  /* checkinggg if I got a token */
       } catch (e) {
         // Restoring token failed
+        /* YO there is no token here we gotta get one */
+        /* Make an API call to get that badboi */
       }
 
       // After restoring token, we may need to validate it in production apps
@@ -111,6 +114,7 @@ export default function App({ navigation }) {
   const authContext = React.useMemo(
     () => ({
       signIn: async (data) => {
+        /* when sign in button is clicked that means I need an api because we dont have a token */
         // In a production app, we need to send some data (usually username, password) to server and get a token
         // We will also need to handle errors if sign in failed
         // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
@@ -125,7 +129,17 @@ export default function App({ navigation }) {
         // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
         // In the example, we'll use a dummy token
 
-        dispatch({ type: "SIGN_IN", token: "dummy-auth-token" });
+        /* Steps for signing up a new user */
+        /*  Front END                                                          Back END
+            1. Front END: hey here is a new user that signed up mr backend
+            2. Back END: yoo coool cool cool here is what ill do:
+                          - ill save this data you sent into the db
+                          - then ill do what im supposed to do for sign in (registeration and signin can happen at the same time)
+                          - then ill send you a token
+            3. Front End : thanks for the blue checkmark (token) Ill put it in my securestore
+         */
+
+        dispatch({ type: "SIGN_IN", token: "dummy-auth-token" }); // im a dummy token <('.'<)
       },
     }),
     []
